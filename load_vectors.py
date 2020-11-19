@@ -2,7 +2,7 @@ import sys
 import argparse
 import numpy
 
-import headpq 
+#import headpq 
 
 from sklearn import preprocessing
 from ioutils import load_picle
@@ -50,9 +50,9 @@ class word_embedding:
         sim = self.represent(w1).dot(self.represent(w2))
         return sim
 
-    def closest(self, w, n=10):
-        scores = self.vocab.dot(self.represent(w))
-        return headpq.nlargest(n, zip(scores, self.vocab_index))
+    #def closest(self, w, n=10):
+     #   scores = self.vocab.dot(self.represent(w))
+      #  return headpq.nlargest(n, zip(scores, self.vocab_index))
 
 class sequential_embedding:
     def __init__(self, year_embeds, **kwargs):
