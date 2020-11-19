@@ -1,7 +1,7 @@
 import sys
 import argparse
 import numpy
-import cPickle as pickle
+import pickle
 
 #import headpq 
 
