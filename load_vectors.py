@@ -1,11 +1,12 @@
 import sys
 import argparse
 import numpy
+import cPickle as pickle
 
 #import headpq 
 
 from sklearn import preprocessing
-from ioutils import load_picle
+
 
 class word_embedding:
 
@@ -39,7 +40,9 @@ class word_embedding:
 
     def load_vector(_class, path, normalize=True, add_context=False, **kwargs):
         vecs = np.load(path + "-w.npy", mmap_mode="c")
-        vocab = load_pickle(path + "-vocab.pkl")
+        with open(path + "-vocab,pkl", "rb") as fp:
+            vocab = pickle.load(fp)
+
 
         return _class(vecs, vocab, normalize)
 
