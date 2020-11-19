@@ -1,0 +1,14 @@
+import glove
+import numpy
+import argparse
+
+
+def compute_length(a):
+    return numpy.linalg.norm(a, axis=a.ndim-1)
+    pass
+
+def cosine_similarity(array1, array2):
+    dp = numpy.dot(array2, array1)
+    cosine = dp/(compute_length(array1)*compute_length(array2))
+    return cosine
+    pass
