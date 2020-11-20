@@ -35,6 +35,11 @@ if __name__ == "__main__":
     print(get_random_words("../sgns", 1980))
     print(get_random_words("../sgns", 1990))
     time_sims = embeddings.get_time_sims("she", "homemaker")
-    print("Similarity between gay and lesbian from 1980 to 1990:")
     for year, sim in time_sims.items():
         print("{}: {}".format(year,sim))
+
+    time_sims = embeddings.get_time_sims("he", "computer programmer")
+    for year, sim in time_sims.items():
+        print("{}: {}".format(year,sim))
+
+    
