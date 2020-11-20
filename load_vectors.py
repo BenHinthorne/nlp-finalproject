@@ -42,7 +42,7 @@ class word_embedding:
     @classmethod
     def load_vector(_class, path, normalize=True, add_context=False, **kwargs):
         vecs = numpy.load(path + "-w.npy", mmap_mode="c")
-        with open(path + "-vocab,pkl", "rb") as fp:
+        with open(path + "-vocab.pkl", "rb") as fp:
             vocab = pickle.load(fp)
 
 
