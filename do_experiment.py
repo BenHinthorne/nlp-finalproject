@@ -4,7 +4,7 @@ import load_vectors
 ## Compute Cosine Similarity of for this random distribution of words over different years
 
 def get_random_words(path, year):
-    embedding = load_vectors.load_vector(path + "/" + str(year))
+    embedding = load_vectors.word_embedding.load_vector(path + "/" + str(year))
     print(embedding.dimension)
 
 if __name__ == "__main__":
