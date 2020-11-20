@@ -27,11 +27,8 @@ class word_embedding:
             print("Not in Vocabulary: ", key)
             raise KeyError
         else:
-            if key in self.vocab_index:
-                return self.vecs[self.vocab_index[key], :]
-            else:
-                print("Not in Vocabulary: ", key)
-                return np.zeros(self.dimension)
+            return self.represent(key)
+            
 
     def __iter__(self):
         return self.vocab_index.__iter__()
@@ -54,6 +51,14 @@ class word_embedding:
     def similarity(self, w1, w2):
         sim = self.represent(w1).dot(self.represent(w2))
         return sim
+    
+    def represent(self, word):
+        if key in self.vocab_index:
+            return self.vecs[self.vocab_index[key], :]
+        else:
+            print("Not in Vocabulary: ", key)
+            return np.zeros(self.dimension)
+
 
     #def closest(self, w, n=10):
      #   scores = self.vocab.dot(self.represent(w))
