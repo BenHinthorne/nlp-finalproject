@@ -49,7 +49,7 @@ class word_embedding:
         return _class(vecs, vocab, normalize)
 
     def normalize(self):
-        preprocessing.normalize(self.m, copy=False)
+        preprocessing.normalize(self.vecs, copy=False)
 
     def similarity(self, w1, w2):
         sim = self.represent(w1).dot(self.represent(w2))
