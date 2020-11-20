@@ -37,4 +37,4 @@ if __name__ == "__main__":
     time_sims = embeddings.get_time_sims("she", "homemaker")
     print("Similarity between gay and lesbian from 1980 to 1990:")
     for year, sim in time_sims.items():
-        print("{}: {}".format(year,sim)
+        print("{}: {}".format(year,sim))
