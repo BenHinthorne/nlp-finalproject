@@ -6,7 +6,7 @@ import load_vectors
 def get_random_words(path, year):
     embedding = load_vectors.word_embedding.load_vector(path + "/" + str(year))
     print(embedding.vocab)
-    print(embedding.dimension)
+    print(len(embedding.vocab))
 
 if __name__ == "__main__":
     embeddings = load_vectors.sequential_embedding.load("../sgns", range(1980, 2000, 10))
