@@ -68,7 +68,8 @@ class sequential_embedding:
     def __init__(self, year_embeds, **kwargs):
         self.embeds = year_embeds
     
-    def load(path, years, **kwargs):
+    @classmethod
+    def load(_class, path, years, **kwargs):
         embeds = collections.OrderedDict()
         for year in years:
             embeds[year] = word_embedding.load_vector(path + "/" + str(year), **kwargs)
