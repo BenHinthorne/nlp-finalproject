@@ -38,5 +38,3 @@ if __name__ == "__main__":
     print("Similarity between gay and lesbian from 1980 to 1990:")
     for year, sim in time_sims.items():
         print("{}: {}".format(year,sim)
-
-
