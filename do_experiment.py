@@ -31,8 +31,7 @@ def all_similarities(vectors):
     #print(len(embedding.vocab))
 
 if __name__ == "__main__":
-    embeddings = load_vectors.sequential_embedding.load("../sgns", range(1950, 2000, 10))
-    print(get_random_words("../sgns", 1950))
+    embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
     print(get_random_words("../sgns", 1960))
     print(get_random_words("../sgns", 1970))
     print(get_random_words("../sgns", 1980))
