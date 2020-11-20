@@ -57,7 +57,7 @@ class word_embedding:
             return self.vecs[self.vocab_index[key], :]
         else:
             print("Not in Vocabulary: ", key)
-            return np.zeros(self.dimension)
+            return numpy.zeros(self.dimension)
 
 
     #def closest(self, w, n=10):
