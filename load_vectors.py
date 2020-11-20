@@ -39,6 +39,7 @@ class word_embedding:
     def __contains__(self, key):
         return not (key in self.vocab_index)
 
+    @classmethod
     def load_vector(_class, path, normalize=True, add_context=False, **kwargs):
         vecs = np.load(path + "-w.npy", mmap_mode="c")
         with open(path + "-vocab,pkl", "rb") as fp:
@@ -65,7 +66,7 @@ class sequential_embedding:
     def load(path, years, **kwargs):
         embeds = collections.OrderedDict()
         for year in years:
-            embeds[year] = word_embedding.load(path + "/" + str(year), **kwargs)
+            embeds[year] = word_embedding.load_vector(path + "/" + str(year), **kwargs)
 
         return sequential_embedding(embeds)
 
