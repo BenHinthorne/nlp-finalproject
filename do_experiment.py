@@ -10,7 +10,7 @@ def get_random_words(path, year):
     embedding = load_vectors.word_embedding.load_vector(path + "/" + str(year))
     random_sims = []
     for i in range(0,100):
-        sim = embedding.similarity(random.choice(embeddings.vocab), random.choice(embeddings.vocab))
+        sim = embedding.similarity(random.choice(embedding.vocab), random.choice(embedding.vocab))
         if sim < 1:
             random_sims.append(sim)
     print(random_sims)
