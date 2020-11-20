@@ -13,7 +13,12 @@ def get_random_words(path, year):
         sim = embedding.similarity(random.choice(embedding.vocab), random.choice(embedding.vocab))
         if sim < 1:
             random_sims.append(sim)
-    print(random_sims)
+    all_similarities(embedding.vecs)
+    #print(random_sims)
+
+def all_similarities(vectors):
+    result = vectors.dot(vectors.T)
+    print(numpy.mean(result))
 
 
     #print(embedding.vocab)
