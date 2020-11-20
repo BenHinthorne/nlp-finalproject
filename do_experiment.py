@@ -1,5 +1,5 @@
 import load_vectors
-import random.choice()
+import random
 
 
 
