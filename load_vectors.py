@@ -52,7 +52,7 @@ class word_embedding:
         sim = self.represent(w1).dot(self.represent(w2))
         return sim
     
-    def represent(self, word):
+    def represent(self, key):
         if key in self.vocab_index:
             return self.vecs[self.vocab_index[key], :]
         else:
