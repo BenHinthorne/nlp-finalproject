@@ -39,8 +39,18 @@ if __name__ == "__main__":
     time_sims = embeddings.get_time_sims("she", "homemaker")
     for year, sim in time_sims.items():
         print("{}: {}".format(year,sim))
+    
+    time_sims = embeddings.get_time_sims("he", "homemaker")
+    for year, sim in time_sims.items():
+        print("{}: {}".format(year,sim))
+
+    
 
     time_sims = embeddings.get_time_sims("he", "skipper")
+    for year, sim in time_sims.items():
+        print("{}: {}".format(year,sim))
+
+    time_sims = embeddings.get_time_sims("she", "skipper")
     for year, sim in time_sims.items():
         print("{}: {}".format(year,sim))
 
