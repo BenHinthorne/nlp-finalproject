@@ -5,6 +5,7 @@ import load_vectors
 
 def get_random_words(path, year):
     embedding = load_vectors.word_embedding.load_vector(path + "/" + str(year))
+    print(embedding.vocab)
     print(embedding.dimension)
 
 if __name__ == "__main__":
