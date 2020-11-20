@@ -2,6 +2,7 @@ import sys
 import argparse
 import numpy
 import pickle
+import collections
 
 #import headpq 
 
