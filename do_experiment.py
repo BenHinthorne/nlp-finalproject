@@ -3,13 +3,25 @@ import random
 import numpy
 
 
+def run_experiment(occupations, start_year, end_year):
+    sims = {}
+    for i in range(start_year, end_year, 10):
+        sims[i] = []
+    embeddings = load_vectors.sequential_embedding.load("../sgns", range(start_year, end_year, 10))
+    
+    for occ in occupations:
+        he_time_sims = embeddings.get_time_sims("he", occ)
+        she_time_sims = embeddings.get_time_sims("she", occ)
+        for year, sim in he_time_sims:
+            year_sims = sims[year].append(("he", occ, sim))
+            sims[year] = year_sims
 
-extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
-extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
-## Pick some random distribution of words 
-## Compute Cosine Similarity of for this random distribution of words over different years
+        for year, sim in she_time_sims:
+            year_sims = sims[year].append("she", occ, sim)
+            sims[year] = year_sims
+    
+    return sims
 
-## Questions for Xanda: How to do the best baseline? How to credit a github? Best way to report results? 
 
 
 ## Create Random Baseline
@@ -26,11 +38,6 @@ def create_baseline(path, year):
     return baseline
 
 
-## Takes Too Long to Run!! 
-def all_similarities(vectors):
-    result = vectors.dot(vectors.T)
-    print(numpy.mean(result))
-
 def create_baselines():
     baselines = []
     for year in range(1800, 2000, 10):
@@ -43,7 +50,17 @@ def create_baselines():
 
 if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
-    create_baselines()
+
+     
+    #create_baselines()
+
+    extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
+    extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
+    all_occupations = extreme_he + extreme_she 
+
+    print(run_experiment(all_occupations, 1960, 1970)
+
+
     #print(get_random_words("../sgns", 1970))
     #print(get_random_words("../sgns", 1980))
     #print(get_random_words("../sgns", 1990))
