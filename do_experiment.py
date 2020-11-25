@@ -48,13 +48,12 @@ def create_baseline(path, year):
 def create_baselines():
     baselines = []
     for year in range(1800, 2000, 10):
-        baselines.append(str(create_baseline("../sgns", year)))
+        baselines.append(create_baseline("../sgns", year))
     with open("baseline.txt", 'w') as f:
-        f.writelines(baselines)
+        for val in baselines:
+            f.write(str(val))
+            f.write("\n")
     
-
-    
-
 if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
 
