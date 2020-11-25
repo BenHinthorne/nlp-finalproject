@@ -73,15 +73,15 @@ def plot_analysis(df, occupation):
     he_label = "he/" + occupation
     she_label = "she/" + occupation
 
-    ax1 = df.plot(x='year', y='baseline', color="green", label="baseline", kind="scatter")
-    df.plot(x='year', y=he_label, kind='scatter', color="red", label=he_label, ax=ax1)
-    df.plot(x='year', y=she_label, kind='scatter', color="blue", label=she_label, ax=ax1)
+    ax1 = df.plot(x='year', y='baseline', color="blue", label="baseline", kind="scatter")
+    df.plot(x='year', y=he_label, kind='scatter', color="orange", label=he_label, ax=ax1)
+    df.plot(x='year', y=she_label, kind='scatter', color="green", label=she_label, ax=ax1)
     plt.xlabel("Year")
     plt.ylabel("Cosine Similarity") 
     filename = occupation + "_scatter.png"
     plt.savefig(filename)
 
-    df.plot(x='year', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="line")
+    df.plot(x='year', y=["baseline", he_label, she_label], kind="line")
     plt.xlabel("Year")
     plt.ylabel("Cosine Similarity") 
     filename = occupation + "_line.png"
