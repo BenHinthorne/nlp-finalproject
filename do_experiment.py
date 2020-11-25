@@ -1,6 +1,7 @@
 import load_vectors
 import random
 import numpy
+import pandas as pd
 
 
 def run_experiment(occupations, start_year, end_year):
@@ -64,9 +65,28 @@ if __name__ == "__main__":
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
     all_occupations = extreme_he + extreme_she 
 
-    he_scores, she_scores = run_experiment(all_occupations, 1900, 2000)
-    print(he_scores)
-    print(she_scores)
+    start_year = 1900
+    end_year = 2000
+    cols = ["year"]
+    data = {}
+    he_scores, she_scores = run_experiment(all_occupations, start_year, end_year)
+    for i in range(start_year, end_year, 10):
+        years.append(i)
+    data{"year"} = years
+
+
+    num_years = len(he_scores[extreme_he[0]])
+    
+    for key in he_scores:
+        he_key = "he/" + key
+        she_key = "she/" + key
+        data{he_key} =  he_scores[key]
+        data{she_key} = she_score[key]
+        cols.apend(he_key)
+        cols.append(she_key)
+
+    df = pd.DataFrame(data, cols)    
+    print(df)
 
 
 
