@@ -9,21 +9,24 @@ def run_experiment(occupations, start_year, end_year):
         sims[i] = []
     embeddings = load_vectors.sequential_embedding.load("../sgns", range(start_year, end_year, 10))
 
-    she_scores = []
-    he_scores = []
+    she_scores = {}
+    he_scores = {}
     print(sims)
     for occ in occupations:
         he_time_sims = embeddings.get_time_sims("he", occ)
         she_time_sims = embeddings.get_time_sims("she", occ)
+        he_occ_scores = []
+        she_occ_scores = []
         for year, sim in he_time_sims.items():
-            he_scores.append(sim)
-            year_sims = sims[year].append(("he", occ, sim))
+            he_occ_scores.append(sim)
 
         for year, sim in she_time_sims.items():
-            she_scores.append(sim)
-            year_sims = sims[year].append(("she", occ, sim))
+            she_occ_scores.append(sim)
 
-    return he_scores + she_scores
+        he_scores[occ] = he_occ_scores
+        she_scores[occ] = she_occ_scores
+
+    return he_scores, she_scores
 
 
 
@@ -61,7 +64,10 @@ if __name__ == "__main__":
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
     all_occupations = extreme_he + extreme_she 
 
-    print(run_experiment(all_occupations, 1960, 1970))
+    he_scores, she_scores = run_experiment(all_occupations, 1960, 1980)
+    print(he_scores)
+    print(she_scores)
+
 
 
     #print(get_random_words("../sgns", 1970))
