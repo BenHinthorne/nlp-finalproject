@@ -4,6 +4,8 @@ import numpy
 
 
 
+extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
+extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
 ## Pick some random distribution of words 
 ## Compute Cosine Similarity of for this random distribution of words over different years
 
@@ -34,7 +36,7 @@ def create_baselines():
     for year in range(1800, 2000, 10):
         baselines.append(create_baseline("../sgns", year))
     with open("baseline.txt", 'w') as f:
-        f.writelines(baselines)
+        f.writelines(str(baselines))
     
 
     
