@@ -18,8 +18,8 @@ class word_embedding:
 
         self.vocab_index = {w:i for i,w in enumerate(self.vocab)}
 
-        if normalize:
-            self.normalize()
+        #if normalize:
+         #   self.normalize()
 
 
     def __getitem__(self, key):
@@ -48,7 +48,10 @@ class word_embedding:
         preprocessing.normalize(self.vecs, copy=False)
 
     def similarity(self, w1, w2):
-        sim = self.represent(w1).dot(self.represent(w2))
+        v1 = self.represent(w1)
+        v2 = self.represent(w2)
+        sim = (v1.dot(v2))/(numpy.linalg.norm(v1) * numpy.linalg.norm(v2))
+        #sim = (self.represent(w1).dot(self.represent(w2)))
         return sim
     
     def represent(self, key):
