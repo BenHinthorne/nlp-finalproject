@@ -90,7 +90,7 @@ def plot_analysis(df, occupation):
 def plot_difference(df, label_1, label_2):
     df['diff'] = df[label_1] - df[label_2]
     z = numpy.polyfit(x=df.loc[:,'year'], y=df.loc[:,'diff'], deg=1)
-    p = np.poly1d(z)
+    p = numpy.poly1d(z)
     df['trendline'] = p(df.loc[:,'year'])
 
     ax = df.plot(x='year', y='diff', kind="scatter")
