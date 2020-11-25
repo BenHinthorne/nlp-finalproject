@@ -69,6 +69,25 @@ def read_baselines(start_year, end_year):
         needed_vals.append(base_dict[i])
     return needed_vals
 
+def plot_analysis(df, occupation):
+    he_label = "he/" + occupation
+    she_label = "she/" + occupation
+
+    ax1 = df.plot(x='year', y='baseline', color="green", label="baseline", kind="scatter")
+    df.plot(x='year', y=he_label, kind='scatter', color="red", label=he_label, ax=ax1)
+    df.plot(x='year', y=she_label, kind='scatter', color="blue", label=she_label, ax=ax1)
+    plt.xlabel("Year")
+    plt.ylabel("Cosine Similarity") 
+    filename = occupation + "_scatter.png"
+    plt.savefig(filename)
+
+    df.plot(x='year', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="line")
+    plt.xlabel("Year")
+    plt.ylabel("Cosine Similarity") 
+    filename = occupation + "_line.png"
+    plt.savefig(filename)
+    
+
 if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
 
@@ -99,19 +118,19 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
-
+    plot_analysis(df, "homemaker")
     #ax = plt.gca()
     #df.plot(kind='scatter', x='year', y='baseline', ax=ax)
     #df.plot(kind='scatter', x='year', y='he/housekeeper', ax=ax)
     #df.plot(kind='scatter', x='year', y='she/housekeeper', ax=ax)
     #plt.savefig("difplot.png")
-    ax1 = df.plot(x='year', y='baseline', color="green", label="baseline", kind="scatter")
-    df.plot(x='year', y='he/homemaker', kind='scatter', color="red", label="he/homemaker", ax=ax1)
-    df.plot(x='year', y='she/homemaker', kind='scatter', color="blue", label="she/homemaker", ax=ax1)
-    plt.xlabel("Year")
-    plt.ylabel("Cosine Similarity") 
+    #ax1 = df.plot(x='year', y='baseline', color="green", label="baseline", kind="scatter")
+    #df.plot(x='year', y='he/homemaker', kind='scatter', color="red", label="he/homemaker", ax=ax1)
+    #df.plot(x='year', y='she/homemaker', kind='scatter', color="blue", label="she/homemaker", ax=ax1)
+    #plt.xlabel("Year")
+    #plt.ylabel("Cosine Similarity") 
     #df.plot(x='year', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="scatter")
-    plt.savefig('plot.png')
+    #plt.savefig('plot.png')
     #df.plot(x='year', y=["baseline", "he/housekeeper"], kind="scatter")
     #plt.savefig('plot2.png')
 
