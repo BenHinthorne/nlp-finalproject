@@ -98,7 +98,7 @@ def plot_difference(df, label_1, label_2):
     slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df.loc[:,'year'], df.loc[:,'diff'])
 
     df.set_index('year', inplace=True)
-    label = 'Slope: ' + slope + ", RSquared: " + r_value
+    label = 'Slope: ' + str(slope) + ", RSquared: " + str(r_value)
     df.trendline.sort_index(ascending=False).plot(label=label, ax=ax)
     plt.gca().invert_xaxis()
     plt.savefig("uhhh.png")
