@@ -87,6 +87,22 @@ def plot_analysis(df, occupation):
     filename = occupation + "_line.png"
     plt.savefig(filename)
     
+def plot_difference(df, label_1, label_2):
+    df['diff'] = df[label_1] - df[label_2]
+    z = numpy.polyfit(x=df.loc[:,'year'], y=df.loc[:,'diff'], deg=1)
+    p = np.poly1d(z)
+    df['trendline'] = p(df.loc[:,'year'])
+
+    ax = df.plot(x='year', y='diff', kind="scatter")
+    df.set_index('year', inplace=True)
+    df.trendline.sort_index(ascending=False).plot(ax=ax)
+    plt.gca().invert_xaxis()
+    plt.savefig("uhhh.png")
+
+
+
+
+
 
 if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
@@ -118,8 +134,9 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
-    for occ in all_occupations:
-        plot_analysis(df, occ)
+    #for occ in all_occupations:
+     #   plot_analysis(df, occ)
+    plot_difference(df, "he/housekeeper", "she/housekeeper")
     #ax = plt.gca()
     #df.plot(kind='scatter', x='year', y='baseline', ax=ax)
     #df.plot(kind='scatter', x='year', y='he/housekeeper', ax=ax)
