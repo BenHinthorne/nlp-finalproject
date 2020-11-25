@@ -11,7 +11,7 @@ import numpy
 
 
 ## Create Random Baseline
-def create_year_baseline(path, year):
+def create_baseline(path, year):
     embedding = load_vectors.word_embedding.load_vector(path + "/" + str(year))
     random_sims = []
     for i in range(0,50000):
@@ -32,7 +32,7 @@ def all_similarities(vectors):
 
 if __name__ == "__main__":
     embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
-    print(get_random_words("../sgns", 1960))
+    print(create_baseline("../sgns", 1960))
     #print(get_random_words("../sgns", 1970))
     #print(get_random_words("../sgns", 1980))
     #print(get_random_words("../sgns", 1990))
