@@ -118,7 +118,8 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
-    plot_analysis(df, "homemaker")
+    for occ in all_occupations:
+        plot_analysis(df, occ)
     #ax = plt.gca()
     #df.plot(kind='scatter', x='year', y='baseline', ax=ax)
     #df.plot(kind='scatter', x='year', y='he/housekeeper', ax=ax)
