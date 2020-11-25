@@ -105,7 +105,7 @@ if __name__ == "__main__":
     #df.plot(kind='scatter', x='year', y='he/housekeeper', ax=ax)
     #df.plot(kind='scatter', x='year', y='she/housekeeper', ax=ax)
     #plt.savefig("difplot.png")
-    df[["year", "baseline", "he/housekeeper", "she/housekeeper"]].plot(x='year', kind="scatter")
+    df[["year", "baseline", "he/housekeeper", "she/housekeeper"]].plot(x='year', y=['baseline'] kind="scatter")
     #df.plot(x='year', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="scatter")
     plt.savefig('plot.png')
     #df.plot(x='year', y=["baseline", "he/housekeeper"], kind="scatter")
