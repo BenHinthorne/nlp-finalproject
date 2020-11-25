@@ -82,7 +82,7 @@ if __name__ == "__main__":
         he_key = "he/" + key
         she_key = "she/" + key
         data[he_key] =  he_scores[key]
-        data[she_key] = she_score[key]
+        data[she_key] = she_scores[key]
         cols.apend(he_key)
         cols.append(she_key)
 
