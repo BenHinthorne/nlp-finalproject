@@ -8,7 +8,7 @@ def run_experiment(occupations, start_year, end_year):
     for i in range(start_year, end_year, 10):
         sims[i] = []
     embeddings = load_vectors.sequential_embedding.load("../sgns", range(start_year, end_year, 10))
-    
+
     for occ in occupations:
         he_time_sims = embeddings.get_time_sims("he", occ)
         she_time_sims = embeddings.get_time_sims("she", occ)
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
     all_occupations = extreme_he + extreme_she 
 
-    print(run_experiment(all_occupations, 1960, 1970)
+    print(run_experiment(all_occupations, 1960, 1970))
 
 
     #print(get_random_words("../sgns", 1970))
@@ -82,4 +82,3 @@ if __name__ == "__main__":
     for year, sim in time_sims.items():
         print("{}: {}".format(year,sim))
     '''
-    
