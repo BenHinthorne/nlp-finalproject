@@ -42,7 +42,6 @@ class word_embedding:
         with open(path + "-vocab.pkl", "rb") as fp:
             vocab = pickle.load(fp)
 
-
         return _class(vecs, vocab, normalize)
 
     def normalize(self):
