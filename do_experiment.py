@@ -29,10 +29,19 @@ def all_similarities(vectors):
     result = vectors.dot(vectors.T)
     print(numpy.mean(result))
 
+def create_baselines():
+    baselines = []
+    for year in range(1800, 2000, 10):
+        baselines.append(create_baseline("../sgns", year))
+    with open("baseline.txt". 'w') as f:
+        f.writelines(baselines)
+    
+
+    
 
 if __name__ == "__main__":
-    embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
-    print(create_baseline("../sgns", 1960))
+    #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
+    create_baselines()
     #print(get_random_words("../sgns", 1970))
     #print(get_random_words("../sgns", 1980))
     #print(get_random_words("../sgns", 1990))
