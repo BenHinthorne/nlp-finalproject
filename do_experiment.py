@@ -85,7 +85,7 @@ if __name__ == "__main__":
         data[she_key] = she_scores[key]
         cols.append(he_key)
         cols.append(she_key)
-
+    print(cols)
     df = pd.DataFrame(data, cols)    
     print(df)
 
