@@ -100,7 +100,7 @@ if __name__ == "__main__":
   
     print(df)
 
-    df.plot(x='years', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="line")
+    df.plot(x='year', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="line")
     plt.savefig('plot.png')
 
 
