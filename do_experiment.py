@@ -102,6 +102,8 @@ if __name__ == "__main__":
 
     df.plot(x='year', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="line")
     plt.savefig('plot.png')
+    df.plot(x='year', y=["baseline", "he/housekeeper"], kind="line")
+    plt.savefig('plot2.png')
 
 
 
