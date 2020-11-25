@@ -12,6 +12,8 @@ def run_experiment(occupations, start_year, end_year):
     for occ in occupations:
         he_time_sims = embeddings.get_time_sims("he", occ)
         she_time_sims = embeddings.get_time_sims("she", occ)
+        print(he_time_sims)
+        print(she_time_sims)
         for year, sim in he_time_sims:
             year_sims = sims[year].append(("he", occ, sim))
             sims[year] = year_sims
