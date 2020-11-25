@@ -72,7 +72,7 @@ if __name__ == "__main__":
     he_scores, she_scores = run_experiment(all_occupations, start_year, end_year)
     for i in range(start_year, end_year, 10):
         years.append(i)
-    data{"year"} = years
+    data["year"] = years
 
 
     num_years = len(he_scores[extreme_he[0]])
@@ -80,8 +80,8 @@ if __name__ == "__main__":
     for key in he_scores:
         he_key = "he/" + key
         she_key = "she/" + key
-        data{he_key} =  he_scores[key]
-        data{she_key} = she_score[key]
+        data[he_key] =  he_scores[key]
+        data[she_key] = she_score[key]
         cols.apend(he_key)
         cols.append(she_key)
 
