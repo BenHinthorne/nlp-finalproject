@@ -50,7 +50,10 @@ class word_embedding:
     def similarity(self, w1, w2):
         v1 = self.represent(w1)
         v2 = self.represent(w2)
-        sim = (v1.dot(v2))/(numpy.linalg.norm(v1) * numpy.linalg.norm(v2))
+        if numpy.linalg.norm(v1) == 0 or numpy.linalg.norm(v2) == 0:
+            sim = 0
+        else:
+            sim = (v1.dot(v2))/(numpy.linalg.norm(v1) * numpy.linalg.norm(v2))
         #sim = (self.represent(w1).dot(self.represent(w2)))
         return sim
     
