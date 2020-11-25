@@ -56,7 +56,7 @@ def create_baselines():
 
 def read_baselines(start_year, end_year):
     with open("baseline.txt", 'r') as f:
-        baselines = f.readlines()
+        baselines = [line.strip() for line in f]
     year = 1800
     base_dict = {}
     for val in baselines:
