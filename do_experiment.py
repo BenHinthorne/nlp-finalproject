@@ -9,23 +9,21 @@ def run_experiment(occupations, start_year, end_year):
         sims[i] = []
     embeddings = load_vectors.sequential_embedding.load("../sgns", range(start_year, end_year, 10))
 
+    she_scores = []
+    he_scores = []
     print(sims)
     for occ in occupations:
         he_time_sims = embeddings.get_time_sims("he", occ)
         she_time_sims = embeddings.get_time_sims("she", occ)
-        #print(he_time_sims)
-        #print(she_time_sims)
         for year, sim in he_time_sims.items():
+            he_scores.append(sim)
             year_sims = sims[year].append(("he", occ, sim))
-            sims[year] = year_sims
 
         for year, sim in she_time_sims.items():
-            print(year)
-            print(sims[year])
+            she_scores.append(sim)
             year_sims = sims[year].append(("she", occ, sim))
-            sims[year] = year_sims
-    
-    return sims
+
+    return he_scores + she_scores
 
 
 
