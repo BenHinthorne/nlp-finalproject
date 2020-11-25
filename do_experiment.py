@@ -2,6 +2,7 @@ import load_vectors
 import random
 import numpy
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def run_experiment(occupations, start_year, end_year):
@@ -98,6 +99,9 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
+
+    df.plot(x='years', y=["baseline", "he/housekeeper", "she/housekeeper"], kind="line")
+    plt.savefig('plot.png')
 
 
 
