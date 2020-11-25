@@ -64,7 +64,7 @@ if __name__ == "__main__":
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
     all_occupations = extreme_he + extreme_she 
 
-    he_scores, she_scores = run_experiment(all_occupations, 1960, 1980)
+    he_scores, she_scores = run_experiment(all_occupations, 1900, 2000)
     print(he_scores)
     print(she_scores)
 
