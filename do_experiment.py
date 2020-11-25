@@ -20,6 +20,7 @@ def run_experiment(occupations, start_year, end_year):
             sims[year] = year_sims
 
         for year, sim in she_time_sims.items():
+            print(year)
             print(sims[year])
             year_sims = sims[year].append(("she", occ, sim))
             sims[year] = year_sims
