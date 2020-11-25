@@ -75,18 +75,13 @@ if __name__ == "__main__":
         years.append(i)
     data["year"] = years
 
-
-    num_years = len(he_scores[extreme_he[0]])
-    
+    df = pd.DataFrame(data)
     for key in he_scores:
         he_key = "he/" + key
         she_key = "she/" + key
-        data[he_key] =  he_scores[key]
-        data[she_key] = she_scores[key]
-        cols.append(he_key)
-        cols.append(she_key)
-    print(cols)
-    df = pd.DataFrame(data, cols)    
+        df[he_key] =  he_scores[key]
+        df[she_key] = she_scores[key]
+  
     print(df)
 
 
