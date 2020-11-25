@@ -3,6 +3,7 @@ import random
 import numpy
 import pandas as pd
 import matplotlib.pyplot as plt
+import scipy
 
 
 def run_experiment(occupations, start_year, end_year):
@@ -95,9 +96,15 @@ def plot_difference(df, label_1, label_2):
 
     ax = df.plot(x='year', y='diff', kind="scatter")
     df.set_index('year', inplace=True)
-    df.trendline.sort_index(ascending=False).plot(ax=ax)
+
+    slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df['year'], df['diff'])
+
+    label = 'Slope: ' + slope + ", RSquared: " + r_value
+    df.trendline.sort_index(ascending=False).plot(label=label, ax=ax)
     plt.gca().invert_xaxis()
     plt.savefig("uhhh.png")
+
+    
 
 
 
