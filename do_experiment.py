@@ -83,7 +83,7 @@ if __name__ == "__main__":
         she_key = "she/" + key
         data[he_key] =  he_scores[key]
         data[she_key] = she_scores[key]
-        cols.apend(he_key)
+        cols.append(he_key)
         cols.append(she_key)
 
     df = pd.DataFrame(data, cols)    
