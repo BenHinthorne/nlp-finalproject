@@ -9,6 +9,7 @@ def run_experiment(occupations, start_year, end_year):
         sims[i] = []
     embeddings = load_vectors.sequential_embedding.load("../sgns", range(start_year, end_year, 10))
 
+    print(sims)
     for occ in occupations:
         he_time_sims = embeddings.get_time_sims("he", occ)
         she_time_sims = embeddings.get_time_sims("she", occ)
@@ -19,6 +20,7 @@ def run_experiment(occupations, start_year, end_year):
             sims[year] = year_sims
 
         for year, sim in she_time_sims.items():
+            print(sims[year])
             year_sims = sims[year].append(("she", occ, sim))
             sims[year] = year_sims
     
