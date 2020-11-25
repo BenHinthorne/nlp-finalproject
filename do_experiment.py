@@ -33,7 +33,7 @@ def create_baselines():
     baselines = []
     for year in range(1800, 2000, 10):
         baselines.append(create_baseline("../sgns", year))
-    with open("baseline.txt". 'w') as f:
+    with open("baseline.txt", 'w') as f:
         f.writelines(baselines)
     
 
