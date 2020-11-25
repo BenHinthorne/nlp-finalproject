@@ -48,9 +48,9 @@ def create_baseline(path, year):
 def create_baselines():
     baselines = []
     for year in range(1800, 2000, 10):
-        baselines.append(create_baseline("../sgns", year))
+        baselines.append(str(create_baseline("../sgns", year)))
     with open("baseline.txt", 'w') as f:
-        f.writelines(str(baselines))
+        f.writelines(baselines)
     
 
     
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
 
      
-    #create_baselines()
+    create_baselines()
 
     extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
