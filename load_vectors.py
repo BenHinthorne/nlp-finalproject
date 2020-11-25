@@ -81,10 +81,10 @@ class sequential_embedding:
     def get_time_sims(self, w1, w2):
         time_sims = collections.OrderedDict()
         for year, embed in self.embeds.items():
-            print(w1)
-            print(w2)
-            print(embed.similarity(w1, w2))
-            time_sims[year] = embed.similarity(w1, w2)
+            if (w1 in embed.vocab) and (w2 in embed.vocab):
+                time_sims[year] = embed.similarity(w1, w2)
+            else:
+                time_sims[year] = 0
         return time_sims
 
 
