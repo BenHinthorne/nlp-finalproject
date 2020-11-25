@@ -53,12 +53,26 @@ def create_baselines():
         for val in baselines:
             f.write(str(val))
             f.write("\n")
+
+def read_baselines(start_year, end_year):
+    with open("baseline.txt", 'r') as f:
+        baselines = f.readlines()
+    year = 1800
+    base_dict = {}
+    for val in baselines:
+        base_dict[year] = val
+        year += 10
     
+    needed_vals = []
+    for i in range(start_year, end_year, 10):
+        needed_vals.append(base_dict[i])
+    return needed_vals
+
 if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
 
      
-    create_baselines()
+    #create_baselines()
 
     extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
@@ -73,8 +87,10 @@ if __name__ == "__main__":
     for i in range(start_year, end_year, 10):
         years.append(i)
     data["year"] = years
-
     df = pd.DataFrame(data)
+
+    baselines = read_baselines(start_year, end_year)
+    df["baseline"] = baselines
     for key in he_scores:
         he_key = "he/" + key
         she_key = "she/" + key
