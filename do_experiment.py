@@ -69,6 +69,7 @@ if __name__ == "__main__":
     end_year = 2000
     cols = ["year"]
     data = {}
+    years = []
     he_scores, she_scores = run_experiment(all_occupations, start_year, end_year)
     for i in range(start_year, end_year, 10):
         years.append(i)
