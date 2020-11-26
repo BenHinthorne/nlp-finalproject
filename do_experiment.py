@@ -133,7 +133,7 @@ if __name__ == "__main__":
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
     all_occupations = extreme_he + extreme_she 
 
-    start_year = 1800
+    start_year = 1900
     end_year = 2000
     cols = ["year"]
     data = {}
