@@ -100,7 +100,7 @@ def plot_difference(df, occ):
 
     ax = copy_df.plot(x='year', y='diff', kind="scatter")
     slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(copy_df.loc[:,'year'], copy_df.loc[:,'diff'])
-    r_2 = r_value ** r_value
+    r_2 = abs(r_value) ** abs(r_value)
     copy_df.set_index('year', inplace=True)
     slope_label = 'Slope: ' + str(round(slope,7))
     r_label = 'R^2: ' + str(round(r_2,7))
