@@ -4,6 +4,7 @@ import numpy
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy
+import seaborn as sns
 
 
 def run_experiment(occupations, start_year, end_year):
@@ -103,6 +104,9 @@ def plot_difference(df, label_1, label_2):
     df.trendline.sort_index(ascending=False).plot(label=label, ax=ax)
     plt.gca().invert_xaxis()
     plt.savefig("uhhh.png")
+
+    sns.regplot(df['year'], df['diff'])
+    sns.savefig("sb.png")
 
     
 
