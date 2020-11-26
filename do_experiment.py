@@ -90,6 +90,7 @@ def plot_analysis(df, occupation):
     plt.savefig(filename)
     
 def plot_difference(df, occ):
+    copy_df = df
     label_1 = "he/" + occ
     label_2 = "she/" + occ
     df['diff'] = abs(df[label_1] - df[label_2])
@@ -100,7 +101,7 @@ def plot_difference(df, occ):
     ax = df.plot(x='year', y='diff', kind="scatter")
     slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df.loc[:,'year'], df.loc[:,'diff'])
     r_2 = r_value ** r_value
-    df.set_index('year', inplace=True)
+    #df.set_index('year', inplace=True)
     slope_label = 'Slope: ' + str(round(slope,7))
     r_label = 'R^2: ' + str(round(r_2,7))
 
