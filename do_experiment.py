@@ -99,11 +99,11 @@ def plot_difference(df, label_1, label_2):
 
     df.set_index('year', inplace=True)
     slope_label = 'Slope: ' + str(round(slope,7))
-    r_label = 'R^2: ' + str(round(r_value(r_value,7)))
+    r_label = 'R^2: ' + str(round(r_value,7))
 
     ax.text(0.9,0.9, slope_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
     ax.text(0.9,0.8, r_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
-    df.trendline.sort_index(ascending=False).plot(label=label, ax=ax)
+    df.trendline.sort_index(ascending=False).plot(ax=ax)
     #plt.gca().invert_xaxis()
     plt.savefig("uhhh.png")
 
