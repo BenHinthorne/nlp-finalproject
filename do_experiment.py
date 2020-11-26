@@ -85,10 +85,13 @@ def plot_analysis(df, occupation):
     df.plot(x='year', y=["baseline", he_label, she_label], kind="line")
     plt.xlabel("Year")
     plt.ylabel("Cosine Similarity") 
+    plt.title(occ)
     filename = occupation + "_line.png"
     plt.savefig(filename)
     
-def plot_difference(df, label_1, label_2):
+def plot_difference(df, occ):
+    label_1 = "he/" + occ
+    label_2 = "she/" + occ
     df['diff'] = abs(df[label_1] - df[label_2])
     z = numpy.polyfit(x=df.loc[:,'year'], y=df.loc[:,'diff'], deg=1)
     p = numpy.poly1d(z)
@@ -96,16 +99,20 @@ def plot_difference(df, label_1, label_2):
 
     ax = df.plot(x='year', y='diff', kind="scatter")
     slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df.loc[:,'year'], df.loc[:,'diff'])
-
+    r_2 = r_value ** r_value
     df.set_index('year', inplace=True)
     slope_label = 'Slope: ' + str(round(slope,7))
-    r_label = 'R^2: ' + str(round(r_value,7))
+    r_label = 'R^2: ' + str(round(r_2,7))
 
-    ax.text(0.9,0.9, slope_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
-    ax.text(0.9,0.8, r_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
+    ax.text(0.85,0.9, slope_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
+    ax.text(0.85,0.8, r_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
     df.trendline.sort_index(ascending=False).plot(ax=ax)
-    #plt.gca().invert_xaxis()
-    plt.savefig("uhhh.png")
+    plt.xlabel("year")
+    plt.ylabel("Difference in Cosine Similarity")
+    plt.title(occ)
+    file_name = occ + "diff.png"
+    plt.savefig(filename)
+    return slope, r_2
 
 
     
@@ -145,9 +152,14 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
-    #for occ in all_occupations:
-     #   plot_analysis(df, occ)
-    plot_difference(df, "he/housekeeper", "she/housekeeper")
+    with open("differences.txt", w) as f:
+        for occ in all_occupations:
+            plot_analysis(df, occ)
+            slope, r_2 = plot_difference(df, "housekeeper")
+            line = occ + ", " + str(slope) + ", " + str(r_2)
+            f.write(line)
+            f.write("\n")
+
     #ax = plt.gca()
     #df.plot(kind='scatter', x='year', y='baseline', ax=ax)
     #df.plot(kind='scatter', x='year', y='he/housekeeper', ax=ax)
