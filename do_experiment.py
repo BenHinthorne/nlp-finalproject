@@ -156,8 +156,9 @@ if __name__ == "__main__":
     with open("differences.txt", 'w') as f:
         for occ in all_occupations:
             copy_df = df
+            new_df = df
             plot_analysis(copy_df, occ)
-            slope, r_2 = plot_difference(copy_df, occ)
+            slope, r_2 = plot_difference(new_df, occ)
             line = occ + ", " + str(slope) + ", " + str(r_2)
             f.write(line)
             f.write("\n")
