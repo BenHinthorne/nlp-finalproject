@@ -111,7 +111,7 @@ def plot_difference(df, occ):
     plt.xlabel("year")
     plt.ylabel("Difference in Cosine Similarity")
     plt.title(occ)
-    file_name = occ + "diff.png"
+    filename = occ + "diff.png"
     plt.savefig(filename)
     return slope, r_2
 
@@ -153,10 +153,10 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
-    with open("differences.txt", w) as f:
+    with open("differences.txt", 'w') as f:
         for occ in all_occupations:
             plot_analysis(df, occ)
-            slope, r_2 = plot_difference(df, "housekeeper")
+            slope, r_2 = plot_difference(df, occ)
             line = occ + ", " + str(slope) + ", " + str(r_2)
             f.write(line)
             f.write("\n")
