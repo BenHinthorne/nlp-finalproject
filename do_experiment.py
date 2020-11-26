@@ -93,21 +93,21 @@ def plot_difference(df, occ):
     copy_df = df
     label_1 = "he/" + occ
     label_2 = "she/" + occ
-    df['diff'] = abs(df[label_1] - df[label_2])
-    z = numpy.polyfit(x=df.loc[:,'year'], y=df.loc[:,'diff'], deg=1)
+    df['diff'] = abs(copy_df[label_1] - copy_df[label_2])
+    z = numpy.polyfit(x=copy_df.loc[:,'year'], y=copy_df.loc[:,'diff'], deg=1)
     p = numpy.poly1d(z)
-    df['trendline'] = p(df.loc[:,'year'])
+    df['trendline'] = p(copy_df.loc[:,'year'])
 
-    ax = df.plot(x='year', y='diff', kind="scatter")
-    slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(df.loc[:,'year'], df.loc[:,'diff'])
+    ax = copy_df.plot(x='year', y='diff', kind="scatter")
+    slope, intercept, r_value, p_value, std_err = scipy.stats.linregress(copy_df.loc[:,'year'], copy_df.loc[:,'diff'])
     r_2 = r_value ** r_value
-    #df.set_index('year', inplace=True)
+    copy_df.set_index('year', inplace=True)
     slope_label = 'Slope: ' + str(round(slope,7))
     r_label = 'R^2: ' + str(round(r_2,7))
 
     ax.text(0.85,0.9, slope_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
     ax.text(0.85,0.8, r_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
-    df.trendline.sort_index(ascending=False).plot(ax=ax)
+    copy_df.trendline.sort_index(ascending=False).plot(ax=ax)
     plt.xlabel("year")
     plt.ylabel("Difference in Cosine Similarity")
     plt.title(occ)
@@ -155,8 +155,9 @@ if __name__ == "__main__":
     print(df)
     with open("differences.txt", 'w') as f:
         for occ in all_occupations:
-            plot_analysis(df, occ)
-            slope, r_2 = plot_difference(df, occ)
+            copy_df = df
+            plot_analysis(copy_df, occ)
+            slope, r_2 = plot_difference(copy_df, occ)
             line = occ + ", " + str(slope) + ", " + str(r_2)
             f.write(line)
             f.write("\n")
