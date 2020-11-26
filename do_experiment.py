@@ -153,15 +153,16 @@ if __name__ == "__main__":
         df[she_key] = she_scores[key]
   
     print(df)
-    with open("differences.txt", 'w') as f:
-        for occ in all_occupations:
-            copy_df = df.copy()
-            new_df = df.copy()
-            plot_analysis(copy_df, occ)
-            slope, r_2 = plot_difference(new_df, occ)
-            line = occ + ", " + str(slope) + ", " + str(r_2)
-            f.write(line)
-            f.write("\n")
+    df.to_csv("results.csv", index=False)
+    #with open("differences.txt", 'w') as f:
+     #   for occ in all_occupations:
+      #      copy_df = df.copy()
+       #     new_df = df.copy()
+        #    plot_analysis(copy_df, occ)
+        #    slope, r_2 = plot_difference(new_df, occ)
+        #    line = occ + ", " + str(slope) + ", " + str(r_2)
+        #    f.write(line)
+        #    f.write("\n")
 
     #ax = plt.gca()
     #df.plot(kind='scatter', x='year', y='baseline', ax=ax)
