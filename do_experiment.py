@@ -109,7 +109,7 @@ def plot_difference(df, occ):
     ax.text(0.85,0.8, r_label, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
     copy_df.trendline.sort_index(ascending=False).plot(ax=ax)
     plt.xlabel("year")
-    plt.ylabel("Difference in Cosine Similarity")
+    plt.ylabel("Bias Score")
     plt.title(occ)
     filename = occ + "diff.png"
     plt.savefig(filename)
