@@ -73,7 +73,7 @@ def read_baselines(start_year, end_year):
 def plot_analysis(df, occupation):
     he_label = "he/" + occupation
     she_label = "she/" + occupation
-
+    
     ax1 = df.plot(x='year', y='baseline', color="blue", label="baseline", kind="scatter")
     df.plot(x='year', y=he_label, kind='scatter', color="orange", label=he_label, ax=ax1)
     df.plot(x='year', y=she_label, kind='scatter', color="green", label=she_label, ax=ax1)
@@ -155,8 +155,8 @@ if __name__ == "__main__":
     print(df)
     with open("differences.txt", 'w') as f:
         for occ in all_occupations:
-            copy_df = df
-            new_df = df
+            copy_df = df.copy()
+            new_df = df.copy()
             plot_analysis(copy_df, occ)
             slope, r_2 = plot_difference(new_df, occ)
             line = occ + ", " + str(slope) + ", " + str(r_2)
