@@ -6,7 +6,11 @@ import matplotlib.pyplot as plt
 import scipy
 
 
+## Given a list of occupations, returns the similarity scores of the occupations with 
+## pronouns as a time series from the specified start year to the specified end year
 def run_experiment(occupations, start_year, end_year):
+
+    ## Initialize Sequential Embeddings
     sims = {}
     for i in range(start_year, end_year, 10):
         sims[i] = []
@@ -14,7 +18,8 @@ def run_experiment(occupations, start_year, end_year):
 
     she_scores = {}
     he_scores = {}
-    print(sims)
+
+    ## For Each Occupation, get the time similarities with pronouns
     for occ in occupations:
         he_time_sims = embeddings.get_time_sims("he", occ)
         she_time_sims = embeddings.get_time_sims("she", occ)
@@ -33,20 +38,21 @@ def run_experiment(occupations, start_year, end_year):
 
 
 
-## Create Random Baseline
+## Creates a random baseline of similarity by choosing 500000 random pairs of words to calculate
+## the similarity score, and then takes the average
 def create_baseline(path, year):
     embedding = load_vectors.word_embedding.load_vector(path + "/" + str(year))
     random_sims = []
     for i in range(0,50000):
         sim = embedding.similarity(random.choice(embedding.vocab), random.choice(embedding.vocab))
-        #ensure sims are not exactly the same
+        #ensure words are not exactly the same
         if sim < 1:
             random_sims.append(sim)
     
     baseline = numpy.mean(numpy.array(random_sims))
     return baseline
 
-
+## Creates the baselines and writes them to a file over 1800 to 2000
 def create_baselines():
     baselines = []
     for year in range(1800, 2000, 10):
@@ -56,6 +62,7 @@ def create_baselines():
             f.write(str(val))
             f.write("\n")
 
+## Reads the baselines from a file
 def read_baselines(start_year, end_year):
     with open("baseline.txt", 'r') as f:
         baselines = [float(line.strip()) for line in f]
@@ -70,6 +77,7 @@ def read_baselines(start_year, end_year):
         needed_vals.append(base_dict[i])
     return needed_vals
 
+## Creates a plot of cosine similarity for the specified occupation and passed in data frame
 def plot_analysis(df, occupation):
     he_label = "he/" + occupation
     she_label = "she/" + occupation
@@ -88,7 +96,8 @@ def plot_analysis(df, occupation):
     plt.title(occ)
     filename = occupation + "_line.png"
     plt.savefig(filename)
-    
+
+## Plots the difference of cosine similarites at each point in time of he and she (plotting bias score)
 def plot_difference(df, occ):
     copy_df = df
     label_1 = "he/" + occ
@@ -116,25 +125,20 @@ def plot_difference(df, occ):
     return slope, r_2
 
 
-    
-
-
-
-
-
-
 if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
-
-     
     #create_baselines()
 
+    ## Define he and she occupations to use
     extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
     all_occupations = extreme_he + extreme_she 
 
+    ## Year boundaries for experiment 
     start_year = 1900
     end_year = 2000
+
+    ## Run the experiment and store in a dataframe 
     cols = ["year"]
     data = {}
     years = []
@@ -144,6 +148,7 @@ if __name__ == "__main__":
     data["year"] = years
     df = pd.DataFrame(data)
 
+    ## Plot the results 
     baselines = read_baselines(start_year, end_year)
     df["baseline"] = baselines
     for key in he_scores:
@@ -151,9 +156,12 @@ if __name__ == "__main__":
         she_key = "she/" + key
         df[he_key] =  he_scores[key]
         df[she_key] = she_scores[key]
-  
+
     print(df)
     df.to_csv("results.csv", index=False)
+
+
+
     with open("differences.txt", 'w') as f:
         for occ in all_occupations:
             copy_df = df.copy()
@@ -164,6 +172,10 @@ if __name__ == "__main__":
             f.write(line)
             f.write("\n")
 
+
+
+    ## Saving in case I want to reference later
+    '''
     #ax = plt.gca()
     #df.plot(kind='scatter', x='year', y='baseline', ax=ax)
     #df.plot(kind='scatter', x='year', y='he/housekeeper', ax=ax)
@@ -185,7 +197,6 @@ if __name__ == "__main__":
     #print(get_random_words("../sgns", 1980))
     #print(get_random_words("../sgns", 1990))
 
-    '''
     time_sims = embeddings.get_time_sims("she", "homemaker")
     for year, sim in time_sims.items():
         print("{}: {}".format(year,sim))
