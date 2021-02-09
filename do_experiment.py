@@ -7,7 +7,7 @@ import scipy
 
 
 def load_vector(year):
-    embeddings = load_vectors.sequential_embedding.load("../sgns")
+    embeddings = load_vectors.word_embedding.load("../sgns")
     return embeddings 
 
 def cos_sim(embeddings, w1, w2):
