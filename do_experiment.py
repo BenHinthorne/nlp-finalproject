@@ -7,7 +7,7 @@ import scipy
 
 
 def load_vector(year):
-    embeddings = load_vectors.word_embedding.load_vector("../sgns")
+    embeddings = load_vectors.word_embedding.load_vector("../sgns/1990")
     return embeddings 
 
 def cos_sim(embeddings, w1, w2):
@@ -16,7 +16,7 @@ def cos_sim(embeddings, w1, w2):
 def create_single_baseline(embedding):
     random_sims = []
     for i in range(0,50000):
-        sim = cos_sim(random.choice(embedding.vocab), random.choice(embedding.vocab))
+        sim = cos_sim(embedding, random.choice(embedding.vocab), random.choice(embedding.vocab))
         if sim < 1:
             random_sims.append(sim)
     
@@ -27,7 +27,7 @@ def run_small_test():
     embeds = load_vector(1990)
     same_sim = cos_sim(embeds, "world", "world")
     print("Cosine similarity of the same word: {}".format(same_sim))
-    print("Baseline random similarity: {}".format(create_single_baseline(embedding)))
+    print("Baseline random similarity: {}".format(create_single_baseline(embeds)))
 
 ## Given a list of occupations, returns the similarity scores of the occupations with 
 ## pronouns as a time series from the specified start year to the specified end year
