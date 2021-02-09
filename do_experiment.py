@@ -6,6 +6,29 @@ import matplotlib.pyplot as plt
 import scipy
 
 
+def load_vector(year):
+    embeddings = load_vectors.sequential_embedding.load("../sgns")
+    return embeddings 
+
+def cos_sim(embeddings, w1, w2):
+    return embeddings.similarity(w1,w2)
+
+def create_single_baseline(embedding):
+    random_sims = []
+    for i in range(0,50000):
+        sim = cos_sim(random.choice(embedding.vocab), random.choice(embedding.vocab))
+        if sim < 1:
+            random_sims.append(sim)
+    
+    baseline = numpy.mean(numpy.array(random_sims))
+    return baseline
+
+def run_small_test():
+    embeds = load_vector(1990)
+    same_sim = cos_sim(embeds, "world", "world")
+    print("Cosine similarity of the same word: {}".format(same_sim))
+    print("Baseline random similarity: {}".format(create_single_baseline(embedding)))
+
 ## Given a list of occupations, returns the similarity scores of the occupations with 
 ## pronouns as a time series from the specified start year to the specified end year
 def run_experiment(occupations, start_year, end_year):
@@ -129,6 +152,9 @@ if __name__ == "__main__":
     #embeddings = load_vectors.sequential_embedding.load("../sgns", range(1960, 2000, 10))
     #create_baselines()
 
+    run_small_test()
+
+    '''
     ## Define he and she occupations to use
     extreme_she = ["homemaker", "nurse", "receptionist", "librarian", "socialite", "hairdresser", "nanny", "bookkeeper", "stylist", "housekeeper"]
     extreme_he = ["maestro", "skipper", "protege", "philosopher", "captain", "architect", "financier", "warrior", "broadcaster", "magician"]
@@ -174,6 +200,9 @@ if __name__ == "__main__":
 
 
 
+
+
+    '''
     ## Saving in case I want to reference later
     '''
     #ax = plt.gca()
